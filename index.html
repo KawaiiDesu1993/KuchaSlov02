@@ -19,11 +19,7 @@
         </div>
       </div>
       <div id="unity-warning"> </div>
-      <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Kucha slov</div>
-      </div>
+
     </div>
     <script>
       var container = document.querySelector("#unity-container");
@@ -121,9 +117,11 @@
     </script>
 
 
+
+
     <script>
 
-      //vkBridge.send('VKWebAppInit' {});
+      vkBridge.send('VKWebAppInit' {});
 
       function auth(){
         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
@@ -161,7 +159,8 @@
       }
 
       function showRewardedAd(){
-        vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'reward' }).then((data) => {
+        vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'reward' })
+        .then((data) => {
             if (data.result) {
               myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
             } else {
@@ -174,7 +173,7 @@
 
       jQuery(document).ready(function($) // страница прогружена
       {
-        vkBridge.send('VKWebAppInit' {}); // Инициализация ВК
+        vkBridge.send('VKWebAppInit'); // Инициализация ВК
       });
 
     </script>
