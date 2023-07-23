@@ -155,34 +155,39 @@
           console.log(data);});
       }
 
-      function showRewardedAd(){
-        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
-          console.log(data);
-          myGameInstance.SendMessage('VKSDK','RewardGetting',JSON.stringify(data.result));})
-      }
-
       // function showRewardedAd(){
-
-      //   vkBridge.send('VKWebAppCheckNativeAds',{ad_format: 'reward'})
-      //   .then((data) => {
-      //     if (data.result) {
-
-      //         vkBridge.send('VKWebAppShowNativeAds',{ad_format: 'reward'})
-      //           .then((data) => {
-      //             if (data.result) // Успех
-      //               myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
-      //             else // Ошибка 
-      //               console.log('Ошибка при показе');
-      //           })
-      //           .catch((error) => { console.log(error); /* Ошибка */ });
-
-      //       } else {
-      //         console.log('Рекламные материалы не найдены.');
-      //       }
-      //   })
-      //   .catch((error) => { console.log(error); /* Ошибка */  });
+      //   vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
+      //     console.log(data);
+      //     myGameInstance.SendMessage('VKSDK','RewardGetting',JSON.stringify(data.result));})
       // }
 
+      function showRewardedAd(){
+        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"})
+          .then((data) => {
+            if (data.result) // Успех
+              myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
+            else // Ошибка 
+              console.log('Ошибка при показе');
+          })
+          .catch((error) => { console.log(error); /* Ошибка */ });
+      }
+
+      function checkRewardedAd(){
+        vkBridge.send('VKWebAppCheckNativeAds',{ad_format:"reward"})
+        .then((data) => {
+          if (data.result) {
+            // Предзагруженная реклама есть.
+       
+            // Теперь можно создать кнопку
+            // "Прокачать героя за рекламу".   
+            // ...
+                  
+            } else {
+              console.log('Рекламные материалы не найдены.');
+            }
+        })
+        .catch((error) => { console.log(error); /* Ошибка */  });
+      }
 
     </script>
 
