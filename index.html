@@ -158,8 +158,7 @@
       function showRewardedAd(){
         vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
           console.log(data);
-          myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
-          myGameInstance.SendMessage('VKSDK','RewardGetting',JSON.stringify(data.result));})
+          myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');})
       }
 
       // function showRewardedAd(){
