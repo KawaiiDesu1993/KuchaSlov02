@@ -155,10 +155,17 @@
           console.log(data);});
       }
 
+
       function showRewardedAd(){
-        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
-          console.log(data);
-          myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');})
+        vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'reward' })
+        .then((data) => {
+          if (data.result) {
+              myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
+            } else {
+              console.log('Рекламные материалы не найдены.');
+            }
+        })
+        .catch((error) => { console.log(error); /* Ошибка */  });
       }
 
       // function showRewardedAd(){
