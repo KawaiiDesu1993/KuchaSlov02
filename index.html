@@ -102,10 +102,11 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
+          unityI = unityInstance;
           loadingBar.style.display = "none";
-          //fullscreenButton.onclick = () => {
-          // unityInstance.SetFullscreen(1);
-          //};
+          fullscreenButton.onclick = () => {
+          unityInstance.SetFullscreen(1);
+          };
         }).catch((message) => {
           alert(message);
         });
@@ -157,9 +158,6 @@
 
       function showRewardedAd(){
         vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
-            if (data.result) {
-              unityI.SendMessage('ButtonAds','PlusCoinAd');
-            }
           console.log(data);
           unityI.SendMessage('VKSDK','RewardGetting',JSON.stringify(data.result));})
       }
