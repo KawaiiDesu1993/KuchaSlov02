@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | Kucha slov</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
   </head>
   <body>
     <div id="unity-container" style = "position: absolute; width: 100%; height: 100%; left: 0%; top: 0%;">
@@ -17,14 +19,17 @@
         </div>
       </div>
       <div id="unity-warning"> </div>
-
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">Kucha slov</div>
+      </div>
     </div>
     <script>
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
-      //var fullscreenButton = document.querySelector("#unity-fullscreen-button");
       var warningBanner = document.querySelector("#unity-warning");
 
       // Shows a temporary message banner/ribbon for a few seconds, or
@@ -52,11 +57,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Bild KS_VK.loader.js";
+      var loaderUrl = buildUrl + "/KuchaSlov.loader.js";
       var config = {
-        dataUrl: buildUrl + "/Bild KS_VK.data.unityweb",
-        frameworkUrl: buildUrl + "/Bild KS_VK.framework.js.unityweb",
-        codeUrl: buildUrl + "/Bild KS_VK.wasm.unityweb",
+        dataUrl: buildUrl + "/KuchaSlov.data.unityweb",
+        frameworkUrl: buildUrl + "/KuchaSlov.framework.js.unityweb",
+        codeUrl: buildUrl + "/KuchaSlov.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Kucha slov",
@@ -95,18 +100,19 @@
 
       loadingBar.style.display = "block";
 
+      var myGameInstance = null;
       var script = document.createElement("script");
-      var unityI = null;
       script.src = loaderUrl;
+      
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
-          unityI = unityInstance;
+          myGameInstance = unityInstance;
           loadingBar.style.display = "none";
-          fullscreenButton.onclick = () => {
-          unityInstance.SetFullscreen(1);
-          };
+          //fullscreenButton.onclick = () => {
+            //unityInstance.SetFullscreen(1);
+          //};
         }).catch((message) => {
           alert(message);
         });
@@ -114,17 +120,15 @@
       document.body.appendChild(script);
     </script>
 
-    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 
-    <script type="text/javascript">
 
-      vkBridge.send("VKWebAppInit", {});
 
+    <script>
 
       function auth(){
         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
         console.log(_info);
-        unityI.SendMessage('VKSDK', 'AuthenticateSuccess', JSON.stringify(_info));
+        myGameInstance.SendMessage('VKSDK', 'AuthenticateSuccess', JSON.stringify(_info));
         });
       }
 
@@ -137,7 +141,7 @@
       function getUserData(){
         vkBridge.send("VKWebAppStorageGet",{"keys":["_save"]}).then(data =>{
         console.log(data);
-        unityI.SendMessage('VKSDK', 'DataGetting', JSON.stringify(data));
+        myGameInstance.SendMessage('VKSDK', 'DataGetting', JSON.stringify(data));
       });}
 
       function setUserData(data){
@@ -157,11 +161,22 @@
       }
 
       function showRewardedAd(){
-        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
-          console.log(data);
-          unityI.SendMessage('VKSDK','RewardGetting',JSON.stringify(data.result));})
-      }
+        vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'reward' })
+        .then((data) => {
+            if (data.result) {
+              myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
+            } else {
+              console.log('Рекламные материалы не найдены.');
+            }
+        })
+        .catch((error) => { console.log(error); /* Ошибка */  });
+      }  
 
+
+      jQuery(document).ready(function($) // страница прогружена
+      {
+        vkBridge.send('VKWebAppInit'); // Инициализация ВК
+      });
 
     </script>
 
