@@ -115,12 +115,11 @@
     </script>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 
     <script>
 
-      //vkBridge.send('VKWebAppInit' {});
+      vkBridge.send('VKWebAppInit' {});
 
       function auth(){
         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
@@ -169,11 +168,7 @@
         .catch((error) => { console.log(error); /* Ошибка */  });
       }  
 
-
-      jQuery(document).ready(function($) // страница прогружена
-      {
-        vkBridge.send('VKWebAppInit'); // Инициализация ВК
-      });
+       // Инициализация ВК
 
     </script>
 
