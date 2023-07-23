@@ -154,7 +154,7 @@
         vkBridge.send('VKWebAppShowNativeAds',{ad_format:"interstitial"}).then(data => {
           console.log(data);});
       }
-      
+
 
       function show(){
         vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
@@ -167,7 +167,9 @@
         vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'reward' })
         .then((data) => {
           if (data.result) {
-              show();
+              vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
+              console.log(data);
+              myGameInstance.SendMessage('VKSDK','RewardGetting',JSON.stringify(data.result));})
               myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
             } else {
               console.log('Рекламные материалы не найдены.');
