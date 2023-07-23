@@ -157,8 +157,8 @@
       }
 
       function showRewardedAd(){
-        vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'reward' })
-        .then((data) => {
+        vkBridge.send('VKWebAppCheckNativeAds', {ad_format:"reward"})
+        .then(data => {
             if (data.result) {
               myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
             } else {
