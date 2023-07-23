@@ -121,9 +121,12 @@
     </script>
 
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 
     <script>
+
+      vkBridge.send('VKWebAppInit' {});
 
       function auth(){
         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
@@ -161,8 +164,7 @@
       }
 
       function showRewardedAd(){
-        vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'reward' })
-        .then((data) => {
+        vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'reward' }).then((data) => {
             if (data.result) {
               myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
             } else {
