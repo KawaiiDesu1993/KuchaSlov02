@@ -123,7 +123,7 @@
 
     <script>
 
-      vkBridge.send('VKWebAppInit' {});
+      //vkBridge.send('VKWebAppInit' {});
 
       function auth(){
         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
@@ -174,7 +174,7 @@
 
       jQuery(document).ready(function($) // страница прогружена
       {
-        vkBridge.send('VKWebAppInit'); // Инициализация ВК
+        vkBridge.send('VKWebAppInit' {}); // Инициализация ВК
       });
 
     </script>
