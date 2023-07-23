@@ -118,7 +118,7 @@
 
     <script>
 
-      vkBridge.send('VKWebAppInit');
+      vkBridge.send("VKWebAppInit", {});
 
       function auth(){
         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
@@ -155,22 +155,22 @@
           console.log(data);});
       }
 
-      // function showRewardedAd(){
-      //   vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
-      //     console.log(data);
-      //     unityI.SendMessage('VKSDK','RewardGetting',JSON.stringify(data.result));})
-      // }
-
       function showRewardedAd(){
-        vkBridge.send('VKWebAppShowNativeAds', { ad_format: 'reward' })
-          .then((data) => {
-            if (data.result) // Успех
-              myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
-            else // Ошибка 
-              console.log('Ошибка при показе');
-          })
-          .catch((error) => { console.log(error); /* Ошибка */ });
+        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
+          console.log(data);
+          myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');})
       }
+
+      // function showRewardedAd(){
+      //   vkBridge.send('VKWebAppShowNativeAds', { ad_format: 'reward' })
+      //     .then((data) => {
+      //       if (data.result) // Успех
+      //         myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
+      //       else // Ошибка 
+      //         console.log('Ошибка при показе');
+      //     })
+      //     .catch((error) => { console.log(error); /* Ошибка */ });
+      // }
 
     </script>
 
