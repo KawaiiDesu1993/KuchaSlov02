@@ -156,7 +156,13 @@
       }
 
       function showRewardedAd(){
-        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
+        vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then((data) => {
+            if (data.result) {
+              unityI.SendMessage('VK','RewardGetAD',true);
+
+            } else {
+              unityI.SendMessage('VK','RewardGetAD',false);
+            }
           console.log(data);
           unityI.SendMessage('VK', 'RewardGetting',JSON.stringify(data.result));})
       }
