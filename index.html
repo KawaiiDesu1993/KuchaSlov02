@@ -158,10 +158,10 @@
       function showRewardedAd(){
         vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then((data) => {
             if (data.result) {
-              unityI.SendMessage('VK','RewardGetAD',true);
+              unityI.SendMessage('AddViev','coin10',true);
 
             } else {
-              unityI.SendMessage('VK','RewardGetAD',false);
+              unityI.SendMessage('AddViev','coin10',false);
             }
           console.log(data);
           unityI.SendMessage('VK', 'RewardGetting',JSON.stringify(data.result));})
