@@ -119,6 +119,8 @@
     <script>
 
       vkBridge.send("VKWebAppInit", {});
+        
+      function view(){
 
       vkBridge.subscribe((e) => {
         if (e.detail.type === 'VKWebAppViewHide') {
@@ -131,8 +133,7 @@
             myGameInstance.SendMessage('GlobalMeneger', 'volumOn');
         }
       });
-        
-      function view(){
+
       }
 
       function auth(){
