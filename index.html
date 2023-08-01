@@ -128,9 +128,20 @@
       }
 
       function showInviteBox(){
-        vkBridge.send('VKWebAppShowInviteBox',{requestKey: "key-12345"}).
-          then(data => {
-          console.log(data);});
+        vkBridge.send('VKWebAppShowInviteBox',{requestKey: "key-22233"}).
+          then( (data) => {
+            if (data.success) {
+              // Пользователь нажал «Пригласить» 
+              // ...
+          
+              // Этим выбранным пользователям 
+              // не удалось отправить приглашения 
+              console.log('Приглашения не отправлены', data.notSentIds);
+            }
+          })
+          .catch( (error) => {
+            console.log(error); // Ошибка 
+          });
       }
 
       function getUserData(){
@@ -178,20 +189,15 @@
         .catch((error) => { console.log(error); /* Ошибка */  });
       }
 
-      // function showRewardedAd(){
-      //   vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"})
-      //     .then((data) => {
-      //       if (data.result) // Успех
-      //         myGameInstance.SendMessage('ButtonAds', 'PlusCoinAd');
-      //       else // Ошибка 
-      //         console.log('Ошибка при показе');
-      //     })
-      //     .catch((error) => { console.log(error); /* Ошибка */ });
-      // }
-
       function checkRewardedAd(){
-        vkBridge.send('VKWebAppCheckNativeAds',{ad_format:"reward"}).then(data => {
-          console.log(data);});
+        vkBridge.send('VKWebAppCheckNativeAds', { ad_format: 'reward' })
+        .then((data) => {
+          if (data.result) {
+            } else {
+              console.log('Рекламные материалы не найдены.');
+            }
+        })
+        .catch((error) => { console.log(error); /* Ошибка */  });
       }
 
     </script>
