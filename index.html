@@ -119,9 +119,9 @@
     <script>
 
       vkBridge.send("VKWebAppInit", {});
+      document.addEventListener('visibilitychange', view);
         
       function view(){
-        document.addEventListener('visibilitychange', eventHandler);
         if (document.hidden) { 
             myGameInstance.SendMessage('GlobalMeneger', 'volumOff');
         } else {
