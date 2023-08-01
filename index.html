@@ -119,22 +119,18 @@
     <script>
 
       vkBridge.send("VKWebAppInit", {});
-      document.addEventListener('visibilitychange', view);
+      vkBridge.subscribe(view);
         
-      function view(){
-        if (document.hidden) { 
-            myGameInstance.SendMessage('GlobalMeneger', 'volumOff');
-        } else {
+      function view(e){
+        const { type, data } = e.detail;
+        switch(type) {
+          case 'VKWebAppViewHide':
+            myGameInstance.SendMessage('GlobalMeneger', 'volumOff'); 
+            break;
+          case 'VKWebAppViewRestore': 
             myGameInstance.SendMessage('GlobalMeneger', 'volumOn');
-        }
-      //   vkBridge.subscribe((e) => {
-      //     if (e.detail.type === 'VKWebAppViewHide') {
-      //       myGameInstance.SendMessage('GlobalMeneger', 'volumOff');
-      //     }
-      //     if (e.detail.type === 'VKWebAppViewRestore') {
-      //       myGameInstance.SendMessage('GlobalMeneger', 'volumOn');
-      //     }
-      //   });
+            break;
+          }
       }
 
       function auth(){
