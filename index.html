@@ -129,19 +129,8 @@
 
       function showInviteBox(){
         vkBridge.send('VKWebAppShowInviteBox',{requestKey: "key-22233"}).
-          then( (data) => {
-            if (data.success) {
-              // Пользователь нажал «Пригласить» 
-              // ...
-          
-              // Этим выбранным пользователям 
-              // не удалось отправить приглашения 
-              console.log('Приглашения не отправлены', data.notSentIds);
-            }
-          })
-          .catch( (error) => {
-            console.log(error); // Ошибка 
-          });
+          then(data => {
+          console.log(data);});
       }
 
       function getUserData(){
