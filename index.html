@@ -120,6 +120,27 @@
 
       vkBridge.send("VKWebAppInit", {});
 
+      vkBridge.subscribe(e => {
+        if (!e.detail) {
+          return;
+        }
+
+        switch(e.detail.type) {
+          case 'VKWebAppViewHide':
+            if (e.detail.data.result) {
+              myGameInstance.SendMessage('GlobalMeneger', 'volumOff');
+              console.log(e.detail.data.result);
+            } else {
+              // Ошибка
+            }
+            break;
+          case 'VKWebAppViewRestore':
+            myGameInstance.SendMessage('GlobalMeneger', 'volumOn');
+            console.log(e.detail.data.error_type, e.detail.data.error_data);      
+            break;
+        }
+      });
+
       function auth(){
         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
         console.log(_info);
@@ -154,7 +175,6 @@
         vkBridge.send('VKWebAppShowNativeAds',{ad_format:"interstitial"}).then(data => {
           console.log(data);});
       }
-
 
       function show(){
         vkBridge.send('VKWebAppShowNativeAds',{ad_format:"reward"}).then(data => {
