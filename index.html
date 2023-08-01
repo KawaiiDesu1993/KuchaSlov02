@@ -121,14 +121,20 @@
       vkBridge.send("VKWebAppInit", {});
         
       function view(){
-        vkBridge.subscribe((e) => {
-          if (e.detail.type === 'VKWebAppViewHide') {
+        document.addEventListener('visibilitychange', eventHandler);
+        if (document.hidden) { 
             myGameInstance.SendMessage('GlobalMeneger', 'volumOff');
-          }
-          if (e.detail.type === 'VKWebAppViewRestore') {
+        } else {
             myGameInstance.SendMessage('GlobalMeneger', 'volumOn');
-          }
-        });
+        }
+      //   vkBridge.subscribe((e) => {
+      //     if (e.detail.type === 'VKWebAppViewHide') {
+      //       myGameInstance.SendMessage('GlobalMeneger', 'volumOff');
+      //     }
+      //     if (e.detail.type === 'VKWebAppViewRestore') {
+      //       myGameInstance.SendMessage('GlobalMeneger', 'volumOn');
+      //     }
+      //   });
       }
 
       function auth(){
