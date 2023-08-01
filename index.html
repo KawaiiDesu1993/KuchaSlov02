@@ -119,18 +119,20 @@
     <script>
 
       vkBridge.send("VKWebAppInit", {});
-      vkBridge.subscribe(view);
-        
-      function view(e){
-        const { type, data } = e.detail;
-        switch(type) {
-          case 'VKWebAppViewHide':
-            myGameInstance.SendMessage('GlobalMeneger', 'volumOff'); 
-            break;
-          case 'VKWebAppViewRestore': 
+
+      vkBridge.subscribe((e) => {
+        if (e.detail.type === 'VKWebAppViewHide') {
+            myGameInstance.SendMessage('GlobalMeneger', 'volumOff');
+        }
+      });
+
+      vkBridge.subscribe((e) => {
+        if (e.detail.type === 'VKWebAppViewRestore') {
             myGameInstance.SendMessage('GlobalMeneger', 'volumOn');
-            break;
-          }
+        }
+      });
+        
+      function view(){
       }
 
       function auth(){
