@@ -122,19 +122,9 @@
       vkBridge.subscribe((e) => console.log(e)); 
         
       function view(){
-
-      vkBridge.subscribe((e) => {
-        if (e.detail.type === 'VKWebAppViewHide') {
-            myGameInstance.SendMessage('GlobalMeneger', 'volumOff');
-        }
-      });
-
-      vkBridge.subscribe((e) => {
-        if (e.detail.type === 'VKWebAppViewRestore') {
-            myGameInstance.SendMessage('GlobalMeneger', 'volumOn');
-        }
-      });
-
+        vkBridge.subscribe((e) => {
+        myGameInstance.SendMessage('GlobalMeneger', 'volumSet', e.detail.type);
+        });
       }
 
       function auth(){
