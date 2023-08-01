@@ -119,6 +119,7 @@
     <script>
 
       vkBridge.send("VKWebAppInit", {});
+      vkBridge.subscribe((e) => console.log(e)); 
         
       function view(){
 
