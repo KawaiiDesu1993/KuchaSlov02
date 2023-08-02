@@ -119,25 +119,25 @@
     <script> 
       vkBridge.send("VKWebAppInit", {});
 
-      vkBridge.subscribe(eventHandler);
+      // vkBridge.subscribe(eventHandler);
 
-      function eventHandler(e) {
+      // function eventHandler(e) {
 
-        const { type, data } = e.detail;
-        switch(type) {
-          case 'VKWebAppViewHide':
-            myGameInstance.SendMessage('VKSDK', 'volumSet', "close"); // Останавливаем воспроизведение аудио 
-            console.log(e.detail.type);
-            break;
-          case 'VKWebAppViewRestore': 
-            myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
-            console.log(e.detail.type); // Запускаем воспроизведение
-            break;
-            // Обработчики других событий
-            // ...
-            console.log(e.detail.type);
-          }
-      }
+      //   const { type, data } = e.detail;
+      //   switch(type) {
+      //     case 'VKWebAppViewHide':
+      //       myGameInstance.SendMessage('VKSDK', 'volumSet', "close"); // Останавливаем воспроизведение аудио 
+      //       console.log(e.detail.type);
+      //       break;
+      //     case 'VKWebAppViewRestore': 
+      //       myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
+      //       console.log(e.detail.type); // Запускаем воспроизведение
+      //       break;
+      //       // Обработчики других событий
+      //       // ...
+      //       console.log(e.detail.type);
+      //     }
+      // }
       
 
       function auth(){
