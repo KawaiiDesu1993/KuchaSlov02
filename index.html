@@ -131,10 +131,10 @@
                 myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
                 console.log(event.detail.data.result);
               break;
-            case 'VKWebAppViewRestore': // OPEN
-                myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
-                console.log(event.detail.data.result);  
-              break;
+            // case 'VKWebAppViewRestore': // OPEN
+            //     myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
+            //     console.log(event.detail.data.result);  
+            //   break;
           }
         });
       }
