@@ -128,11 +128,11 @@
 
           switch(event.detail.type) {
             case 'VKWebAppViewHide': //CLOSE
-                myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
+                myGameInstance.SendMessage('Main Camera', 'volumOff');
                 console.log(event.detail.data.result);
               break;
             case 'VKWebAppViewRestore': // OPEN
-                myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
+                myGameInstance.SendMessage('Main Camera', 'volumOn');
                 console.log(event.detail.data.result);  
               break;
           }
