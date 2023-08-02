@@ -117,10 +117,9 @@
     <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 
     <script>
-
+      vkBridge.subscribe(eventHandler); 
       vkBridge.send("VKWebAppInit", {});
 
-      vkBridge.subscribe(eventHandler); 
 
       // document.addEventListener('visibilitychange', function () {
 
@@ -137,16 +136,16 @@
         switch(type) {
           case 'VKWebAppViewHide':
             myGameInstance.SendMessage('VKSDK', 'volumSet', "close"); // Останавливаем воспроизведение аудио 
-            console.log(type);
+            console.log(e.detail.type);
             break;
           case 'VKWebAppViewRestore': 
             myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
-            console.log(type); // Запускаем воспроизведение
+            console.log(e.detail.type); // Запускаем воспроизведение
             break;
                   
             // Обработчики других событий
             // ...
-            console.log(type);
+            console.log(e.detail.type);
           }
       }
       
