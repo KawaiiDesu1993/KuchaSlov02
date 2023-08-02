@@ -123,7 +123,7 @@
         
       function view(){
         vkBridge.subscribe((e) => {
-        myGameInstance.SendMessage('GlobalMeneger', 'volumSet', e.detail.type);
+        myGameInstance.SendMessage('VKSDK', 'volumSet', e.detail.type);
         });
       }
 
