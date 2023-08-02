@@ -125,9 +125,9 @@
       document.addEventListener('visibilitychange', function () {
 
         if (document.hidden) {
-          myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
+          myGameInstance.SendMessage('Main Camera', 'volumOn');
         } else {
-          myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
+          myGameInstance.SendMessage('Main Camera', 'volumOff');
         }
       })
 
