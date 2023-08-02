@@ -125,9 +125,9 @@
       document.addEventListener('visibilitychange', function () {
 
         if (document.hidden) {
-          myGameInstance.SendMessage('Main Camera', 'volumOn');
-        } else {
           myGameInstance.SendMessage('Main Camera', 'volumOff');
+        } else {
+          myGameInstance.SendMessage('Main Camera', 'volumOn');
         }
       })
 
