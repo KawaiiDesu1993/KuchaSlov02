@@ -121,8 +121,29 @@
       vkBridge.send("VKWebAppInit", {}); 
         
       function view(){
-        vkBridge.subscribe((e) => {
-        myGameInstance.SendMessage('VKSDK', 'volumSet', JSON.stringify(e.detail.type));
+        vkBridge.subscribe(event => {
+          if (!event.detail) {
+            return;
+          }
+
+          switch(event.detail.type) {
+            case 'VKWebAppViewHide': //CLOSE
+              if (event.detail.data.result) {
+                myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
+                console.log(event.detail.data.result);
+              } else {
+                // Ошибка
+              }
+              break;
+            case 'VKWebAppViewRestore': // OPEN
+              if (event.detail.data.result) {
+                myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
+                console.log(event.detail.data.result);
+              } else {
+                // Ошибка
+              }    
+              break;
+          }
         });
       }
 
