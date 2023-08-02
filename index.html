@@ -121,16 +121,6 @@
 
       vkBridge.subscribe(eventHandler);
 
-
-      // document.addEventListener('visibilitychange', function () {
-
-      //   if (document.hidden) {
-      //     myGameInstance.SendMessage('Main Camera', 'volumOff');
-      //   } else {
-      //     myGameInstance.SendMessage('Main Camera', 'volumOn');
-      //   }
-      // })
-
       function eventHandler(e) {
 
         const { type, data } = e.detail;
@@ -143,42 +133,12 @@
             myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
             console.log(e.detail.type); // Запускаем воспроизведение
             break;
-          default:
-            myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
-            break;
             // Обработчики других событий
             // ...
             console.log(e.detail.type);
           }
       }
       
-        // vkBridge.subscribe(event => {
-        //   if (!event.detail) {
-        //     return;
-        //   }
-
-        //   if (event.detail.type == 'VKWebAppViewHide') {
-        //       //myGameInstance.SendMessage('Main Camera', 'volumOn');
-        //       myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
-        //       console.log(event.detail.data.result);
-        //   }
-        //   if (event.detail.type == 'VKWebAppViewRestore') {
-        //       //myGameInstance.SendMessage('Main Camera', 'volumOff');
-        //       myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
-        //       console.log(event.detail.data.result);
-        //   }
-
-        //   // switch(event.detail.type) {
-        //   //   case 'VKWebAppViewHide': //CLOSE
-        //   //       myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
-        //   //       console.log(event.detail.data.result);
-        //   //     break;
-        //   //   case 'VKWebAppViewRestore': // OPEN
-        //   //       myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
-        //   //       console.log(event.detail.data.result);  
-        //   //     break;
-        //   // }
-        // });
 
       function auth(){
         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
