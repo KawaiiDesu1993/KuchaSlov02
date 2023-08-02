@@ -116,9 +116,10 @@
 
     <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 
-    <script>
-      vkBridge.subscribe(eventHandler); 
+    <script> 
       vkBridge.send("VKWebAppInit", {});
+
+      vkBridge.subscribe(eventHandler);
 
 
       // document.addEventListener('visibilitychange', function () {
@@ -176,9 +177,6 @@
         //   //     break;
         //   // }
         // });
-
-      function view(){
-      }
 
       function auth(){
         vkBridge.send('VKWebAppGetUserInfo').then(_info =>{
