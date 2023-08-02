@@ -129,6 +129,8 @@
           if (event.detail.type == 'VKWebAppViewRestore') {
               myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
               console.log(event.detail.data.result);
+          } else {
+             myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
           }
 
           // switch(event.detail.type) {
