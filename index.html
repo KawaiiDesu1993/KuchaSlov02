@@ -136,11 +136,11 @@
         const { type, data } = e.detail;
         switch(type) {
           case 'VKWebAppViewHide':
-            myGameInstance.SendMessage('VKSDK', 'volumSet', "close"); // Останавливаем воспроизведение аудио 
+            myGameInstance.SendMessage('VKSDK', 'volumSet', "open"); // Останавливаем воспроизведение аудио 
             console.log(e.detail.type);
             break;
           case 'VKWebAppViewRestore': 
-            myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
+            myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
             console.log(e.detail.type); // Запускаем воспроизведение
             break;
                   
