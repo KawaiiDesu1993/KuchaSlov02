@@ -129,7 +129,10 @@
               //myGameInstance.SendMessage('Main Camera', 'volumOff');
               myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
               console.log(event.detail.data.result);
-          } 
+          } else {
+            myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
+          }
+          
           if (event.detail.type === 'VKWebAppViewHide') {
               //myGameInstance.SendMessage('Main Camera', 'volumOn');
               myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
