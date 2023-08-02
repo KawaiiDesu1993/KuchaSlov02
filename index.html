@@ -118,12 +118,11 @@
 
     <script>
 
-      vkBridge.send("VKWebAppInit", {});
-      vkBridge.subscribe((e) => console.log(e)); 
+      vkBridge.send("VKWebAppInit", {}); 
         
       function view(){
         vkBridge.subscribe((e) => {
-        myGameInstance.SendMessage('VKSDK', 'volumSet', e.detail.type);
+        myGameInstance.SendMessage('VKSDK', 'volumSet', JSON.stringify(e.detail.type));
         });
       }
 
