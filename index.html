@@ -120,33 +120,35 @@
 
       vkBridge.send("VKWebAppInit", {});
 
-      // vkBridge.subscribe(eventHandler); 
+      vkBridge.subscribe(eventHandler); 
 
-      document.addEventListener('visibilitychange', function () {
+      // document.addEventListener('visibilitychange', function () {
 
-        if (document.hidden) {
-          myGameInstance.SendMessage('Main Camera', 'volumOff');
-        } else {
-          myGameInstance.SendMessage('Main Camera', 'volumOn');
-        }
-      })
+      //   if (document.hidden) {
+      //     myGameInstance.SendMessage('Main Camera', 'volumOff');
+      //   } else {
+      //     myGameInstance.SendMessage('Main Camera', 'volumOn');
+      //   }
+      // })
 
-      // function eventHandler(e) {
+      function eventHandler(e) {
 
-      //   const { type, data } = e.detail;
-      //   switch(type) {
-      //     case 'VKWebAppViewHide':
-      //       myGameInstance.SendMessage('VKSDK', 'volumSet', "close"); // Останавливаем воспроизведение аудио 
-      //       break;
-      //     case 'VKWebAppViewRestore': 
-      //       myGameInstance.SendMessage('VKSDK', 'volumSet', "open"); // Запускаем воспроизведение
-      //       break;
+        const { type, data } = e.detail;
+        switch(type) {
+          case 'VKWebAppViewHide':
+            myGameInstance.SendMessage('VKSDK', 'volumSet', "close"); // Останавливаем воспроизведение аудио 
+            console.log(type);
+            break;
+          case 'VKWebAppViewRestore': 
+            myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
+            console.log(type); // Запускаем воспроизведение
+            break;
                   
-      //       // Обработчики других событий
-      //       // ...
-
-      //     }
-      // }
+            // Обработчики других событий
+            // ...
+            console.log(type);
+          }
+      }
       
         // vkBridge.subscribe(event => {
         //   if (!event.detail) {
