@@ -120,25 +120,33 @@
 
       vkBridge.send("VKWebAppInit", {});
 
-      vkBridge.subscribe(eventHandler); 
+      // vkBridge.subscribe(eventHandler); 
 
+      document.addEventListener('visibilitychange', function () {
 
-      function eventHandler(e) {
+        if (document.hidden) {
+          myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
+        } else {
+          myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
+        }
+      })
 
-        const { type, data } = e.detail;
-        switch(type) {
-          case 'VKWebAppViewHide':
-            myGameInstance.SendMessage('VKSDK', 'volumSet', "close"); // Останавливаем воспроизведение аудио 
-            break;
-          case 'VKWebAppViewRestore': 
-            myGameInstance.SendMessage('VKSDK', 'volumSet', "open"); // Запускаем воспроизведение
-            break;
+      // function eventHandler(e) {
+
+      //   const { type, data } = e.detail;
+      //   switch(type) {
+      //     case 'VKWebAppViewHide':
+      //       myGameInstance.SendMessage('VKSDK', 'volumSet', "close"); // Останавливаем воспроизведение аудио 
+      //       break;
+      //     case 'VKWebAppViewRestore': 
+      //       myGameInstance.SendMessage('VKSDK', 'volumSet', "open"); // Запускаем воспроизведение
+      //       break;
                   
-            // Обработчики других событий
-            // ...
+      //       // Обработчики других событий
+      //       // ...
 
-          }
-      }
+      //     }
+      // }
       
         // vkBridge.subscribe(event => {
         //   if (!event.detail) {
