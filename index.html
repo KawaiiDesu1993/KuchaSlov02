@@ -126,11 +126,13 @@
           }
 
           if (event.detail.type === 'VKWebAppViewRestore') {
-              myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
+              myGameInstance.SendMessage('Main Camera', 'volumOff');
+              //myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
               console.log(event.detail.data.result);
           } 
           if (event.detail.type === 'VKWebAppViewHide') {
-             myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
+              myGameInstance.SendMessage('Main Camera', 'volumOn');
+             //myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
              console.log(event.detail.data.result);
           }
 
