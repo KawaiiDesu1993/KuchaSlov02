@@ -119,8 +119,7 @@
     <script>
 
       vkBridge.send("VKWebAppInit", {}); 
-        
-      function view(){
+      
         vkBridge.subscribe(event => {
           if (!event.detail) {
             return;
@@ -145,6 +144,8 @@
           //     break;
           // }
         });
+          
+      function view(){
       }
 
       function auth(){
