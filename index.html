@@ -125,17 +125,24 @@
             return;
           }
 
+          var b = 0;
+
           if (event.detail.type === 'VKWebAppViewRestore') {
               //myGameInstance.SendMessage('Main Camera', 'volumOff');
               myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
-              //console.log(event.detail.data.result);
+              b = 1;
+              console.log(event.detail.data.result);
+          } else {
+            if (b = 0) {
+              myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
+            }
           }
-            
+
         
           if (event.detail.type === 'VKWebAppViewHide') {
               //myGameInstance.SendMessage('Main Camera', 'volumOn');
               myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
-             //console.log(event.detail.data.result);
+              console.log(event.detail.data.result);
           }
 
           // switch(event.detail.type) {
