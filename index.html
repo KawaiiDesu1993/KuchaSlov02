@@ -130,7 +130,7 @@
               myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
               console.log(event.detail.data.result);
           } 
-          if (event.detail.type == 'VKWebAppViewHide') {} {
+          if (event.detail.type == 'VKWebAppViewHide') {
              myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
           }
 
