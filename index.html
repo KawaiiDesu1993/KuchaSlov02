@@ -143,7 +143,9 @@
             myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
             console.log(e.detail.type); // Запускаем воспроизведение
             break;
-                  
+          default:
+            myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
+            break;
             // Обработчики других событий
             // ...
             console.log(e.detail.type);
