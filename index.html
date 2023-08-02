@@ -128,20 +128,12 @@
 
           switch(event.detail.type) {
             case 'VKWebAppViewHide': //CLOSE
-              if (event.detail.data.result) {
                 myGameInstance.SendMessage('VKSDK', 'volumSet', "close");
                 console.log(event.detail.data.result);
-              } else {
-                // Ошибка
-              }
               break;
             case 'VKWebAppViewRestore': // OPEN
-              if (event.detail.data.result) {
                 myGameInstance.SendMessage('VKSDK', 'volumSet', "open");
-                console.log(event.detail.data.result);
-              } else {
-                // Ошибка
-              }    
+                console.log(event.detail.data.result);  
               break;
           }
         });
